@@ -2,8 +2,9 @@ defmodule SnowflakeType do
   @moduledoc """
   Documentation for SnowflakeType.
   """
-  
-  @behaviour Ecto.Type
+
+  use Ecto.Type
+
   def type, do: :integer
 
   # Provide custom casting rules.
@@ -22,7 +23,7 @@ defmodule SnowflakeType do
 
   # When loading data from the database, we are guaranteed to
   # receive a map (as databases are strict) and we will
-  # just put the data back into an URI struct to be stored 
+  # just put the data back into an URI struct to be stored
   # in the loaded schema struct.
   def load(id) when is_integer(id) do
     {:ok, id}
@@ -35,7 +36,7 @@ defmodule SnowflakeType do
   def dump(_), do: :error
 
   @doc """
-  Generates a version 4 (random) UUID.
+  Generate Snowflake ID.
   """
   # @spec generate() :: t
   def generate() do
